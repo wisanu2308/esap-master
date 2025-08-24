@@ -1,0 +1,18 @@
+[
+    {
+        "id": "C62",
+        "name": "PRICE OR UNIT"
+    },
+    {
+        "id": "KGM",
+        "name": "KILOGRAM"
+    },
+    {
+        "id": "MTK",
+        "name": "SQUARE METRE"
+    },
+    {
+        "id": "SET",
+        "name": "SET"
+    }
+]

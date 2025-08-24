@@ -1,0 +1,7 @@
+[
+    {"id": "C", "name": "C = เงินสด"},
+    {"id": "B", "name": "B = หนังสือธนาคารค้ำประกัน"},
+    {"id": "E", "name": "E = e-Guarantee Deposit"},
+    {"id": "O", "name": "O = RGS"},
+    {"id": "M", "name": "M = หนังสือราชการ"}
+]

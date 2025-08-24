@@ -1,0 +1,6 @@
+[
+    {"id":"DI", "name": "DI - AGENT ตัวแทน"},
+    {"id":"CO", "name": "CO - CONCESSIONARIE ผู้ได้รับสัมปทาน"},
+    {"id":"MA", "name": "MA - MAKER ผู้ผลิต"},
+    {"id": "OT", "name": "OT - OTHER อื่น ๆ"}
+]

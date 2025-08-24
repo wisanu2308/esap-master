@@ -1,0 +1,342 @@
+[
+    {
+        "id": "ADP",
+        "name": "ADP | ANDORRAN PESETA"
+    },
+    {
+        "id": "AED",
+        "name": "AED | U.A.E. DIRHAM"
+    },
+    {
+        "id": "AFA",
+        "name": "AFA | AFGHANI"
+    },
+    {
+        "id": "ALL",
+        "name": "ALL | LEK"
+    },
+    {
+        "id": "ANG",
+        "name": "ANG | NETHERLANDS ANTILLEAN GUI"
+    },
+    {
+        "id": "AON",
+        "name": "AON | NEW KWANZA"
+    },
+    {
+        "id": "ARS",
+        "name": "ARS | ARGENTINE PESO"
+    },
+    {
+        "id": "ATS",
+        "name": "ATS | AUSTRIAN SCHILLINGS"
+    },
+    {
+        "id": "AUD",
+        "name": "AUD | AUSTRALIAN DOLLAR"
+    },
+    {
+        "id": "AWG",
+        "name": "AWG | ARUBAN GUILDER"
+    },
+    {
+        "id": "BBD",
+        "name": "BBD | BARBADOS DOLLAR"
+    },
+    {
+        "id": "BDT",
+        "name": "BDT | BANGLADESH TAKA"
+    },
+    {
+        "id": "BEF",
+        "name": "BEF | BELGIAN FRANC"
+    },
+    {
+        "id": "BGL",
+        "name": "BGL | LEV"
+    },
+    {
+        "id": "BHD",
+        "name": "BHD | BAHRAINI DINAR"
+    },
+    {
+        "id": "BIF",
+        "name": "BIF | BURUNDI FRANC"
+    },
+    {
+        "id": "BMD",
+        "name": "BMD | BERMUDIAN DOLLAR"
+    },
+    {
+        "id": "BND",
+        "name": "BND | BRUNEI DOLLAR"
+    },
+    {
+        "id": "BOB",
+        "name": "BOB | BOLIVIANO"
+    },
+    {
+        "id": "BRL",
+        "name": "BRL | BRAZIL REAL"
+    },
+    {
+        "id": "BSD",
+        "name": "BSD | BAHAMIAM DOLLAR"
+    },
+    {
+        "id": "BTN",
+        "name": "BTN | NGULTRUM"
+    },
+    {
+        "id": "BWP",
+        "name": "BWP | PULA"
+    },
+    {
+        "id": "BYB",
+        "name": "BYB | BELARUSSIAN RUBLE"
+    },
+    {
+        "id": "BZD",
+        "name": "BZD | BELIZE DOLLAR"
+    },
+    {
+        "id": "CAD",
+        "name": "CAD | CANADIAN DOLLAR"
+    },
+    {
+        "id": "CHF",
+        "name": "CHF | SWISS FRANC"
+    },
+    {
+        "id": "CNY",
+        "name": "CNY | CHINA RENMINBI"
+    },
+    {
+        "id": "COP",
+        "name": "COP | COLOMBIAN PESO"
+    },
+    {
+        "id": "CYP",
+        "name": "CYP | CYPRUS POUND"
+    },
+    {
+        "id": "CZK",
+        "name": "CZK | CZECH KORUNA"
+    },
+    {
+        "id": "DEM",
+        "name": "DEM | GERMAN MARK"
+    },
+    {
+        "id": "DKK",
+        "name": "DKK | DANISH KRONE"
+    },
+    {
+        "id": "ESP",
+        "name": "ESP | SPANISH PESETA"
+    },
+    {
+        "id": "EUR",
+        "name": "EUR | EURO"
+    },
+    {
+        "id": "FIM",
+        "name": "FIM | FINNISH MARKKA"
+    },
+    {
+        "id": "FRF",
+        "name": "FRF | FRENCH FRANC"
+    },
+    {
+        "id": "GBP",
+        "name": "GBP | BRITISH POUND"
+    },
+    {
+        "id": "GRD",
+        "name": "GRD | GREEK DRACHMA"
+    },
+    {
+        "id": "HKD",
+        "name": "HKD | HONG KONG DOLLAR"
+    },
+    {
+        "id": "HUF",
+        "name": "HUF | FORINT"
+    },
+    {
+        "id": "IDR",
+        "name": "IDR | INDONESIA RUPEE"
+    },
+    {
+        "id": "IEP",
+        "name": "IEP | IRISH PUNT"
+    },
+    {
+        "id": "ILS",
+        "name": "ILS | SHEKEL"
+    },
+    {
+        "id": "INR",
+        "name": "INR | INDIAN RUPEE"
+    },
+    {
+        "id": "IQD",
+        "name": "IQD | IRAQI DINAR"
+    },
+    {
+        "id": "IRR",
+        "name": "IRR | IRANIAN RIAL"
+    },
+    {
+        "id": "ISK",
+        "name": "ISK | ICELAND KRONA"
+    },
+    {
+        "id": "ITL",
+        "name": "ITL | ITALIAN LIRA"
+    },
+    {
+        "id": "JPY",
+        "name": "JPY | JAPANESE YEN"
+    },
+    {
+        "id": "KES",
+        "name": "KES | KENYAN SHILLING"
+    },
+    {
+        "id": "KHR",
+        "name": "KHR | RIEL"
+    },
+    {
+        "id": "KRW",
+        "name": "KRW | KOREAN WON"
+    },
+    {
+        "id": "KWD",
+        "name": "KWD | KUWAITI DINAR"
+    },
+    {
+        "id": "LAK",
+        "name": "LAK | KIP"
+    },
+    {
+        "id": "LKR",
+        "name": "LKR | SRI LANKAN RUPEE"
+    },
+    {
+        "id": "MMK",
+        "name": "MMK | KYAT"
+    },
+    {
+        "id": "MTL",
+        "name": "MTL | MALTESE LIRA"
+    },
+    {
+        "id": "MXN",
+        "name": "MXN | MEXICAN NUEVO PESO"
+    },
+    {
+        "id": "MXP",
+        "name": "MXP | MEXICAN PESO"
+    },
+    {
+        "id": "MYR",
+        "name": "MYR | MALAYSIAN RINGGIT"
+    },
+    {
+        "id": "NLG",
+        "name": "NLG | DUTCH GUILDER"
+    },
+    {
+        "id": "NOK",
+        "name": "NOK | NORWEGIAN KRONE"
+    },
+    {
+        "id": "NPR",
+        "name": "NPR | NEPAL RUPEE"
+    },
+    {
+        "id": "NZD",
+        "name": "NZD | NEW ZEALAND DOLLAR"
+    },
+    {
+        "id": "OMR",
+        "name": "OMR | OMANI RIAL"
+    },
+    {
+        "id": "PHP",
+        "name": "PHP | PHILIPPINE PESO"
+    },
+    {
+        "id": "PKR",
+        "name": "PKR | PAKISTANI RUPEE"
+    },
+    {
+        "id": "PTE",
+        "name": "PTE | PORTUGUESE ESCUDO"
+    },
+    {
+        "id": "QAR",
+        "name": "QAR | QATARI RIYAL"
+    },
+    {
+        "id": "RUR",
+        "name": "RUR | RUSSIAN RUBLE"
+    },
+    {
+        "id": "SAR",
+        "name": "SAR | SAUDI RIYAL"
+    },
+    {
+        "id": "SEK",
+        "name": "SEK | SWEDISH KRONA"
+    },
+    {
+        "id": "SGD",
+        "name": "SGD | SINGAPORE DOLLAR"
+    },
+    {
+        "id": "SKK",
+        "name": "SKK | SLOVAK KORUNA"
+    },
+    {
+        "id": "SYP",
+        "name": "SYP | SYRIAN POUND"
+    },
+    {
+        "id": "THB",
+        "name": "THB | THAI BAHT"
+    },
+    {
+        "id": "TRL",
+        "name": "TRL | TURKISH LIRA"
+    },
+    {
+        "id": "TTD",
+        "name": "TTD | TRINIDAD & TOBAGO DOLLAR"
+    },
+    {
+        "id": "TWD",
+        "name": "TWD | TAIWAN DOLLAR"
+    },
+    {
+        "id": "USD",
+        "name": "USD | U.S. DOLLAR"
+    },
+    {
+        "id": "VEB",
+        "name": "VEB | VENEZUELAN BOLIVAR"
+    },
+    {
+        "id": "VND",
+        "name": "VND | DONG"
+    },
+    {
+        "id": "ZAL",
+        "name": "ZAL | SOUTH AFRICAN RAND"
+    },
+    {
+        "id": "ZAR",
+        "name": "ZAR | SOUTH AFRICA RAND"
+    }
+]

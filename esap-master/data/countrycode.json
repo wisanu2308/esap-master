@@ -1,0 +1,37 @@
+[
+  {
+    "id": "CN",
+    "name": "CN | CHINA",
+    "name2": "CHINA"
+  },
+  {
+    "id": "KR",
+    "name": "KR | KOREA,REPUBLIC OF",
+    "name2": "KOREA,REPUBLIC OF"
+  },
+  {
+    "id": "LA",
+    "name": "LA | LAO PDR",
+    "name2": "LAO PDR"
+  },
+  {
+    "id": "UM",
+    "name": "UM | UNITED STATES MINOR OUTLYING ISLAND",
+    "name2": "UNITED STATES MINOR OUTLYING ISLAND"
+  },
+  {
+    "id": "US",
+    "name": "US | UNITED STATES",
+    "name2": "UNITED STATES"
+  },
+  {
+    "id": "TH",
+    "name": "TH | THAILAND",
+    "name2": "THAILAND"
+  },
+  {
+    "id": "AU",
+    "name": "AU | AUSTRALIA",
+    "name2": "AUSTRALIA"
+  }
+]

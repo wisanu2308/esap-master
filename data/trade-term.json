@@ -1,0 +1,79 @@
+[
+    {
+        "id": "CFR",
+        "name": "COST AND FREIGHT",
+        "name2": "CFR = COST AND FREIGHT"
+
+    },
+    {
+        "id": "CIF",
+        "name": "COST INSURANCE FREIGHT",
+        "name2": "CIF = COST INSURANCE FREIGHT"
+        
+    },
+    {
+        "id": "CIP",
+        "name": "CARRIAGE AND INSURANCE PAID TO",
+        "name2": "CIP = CARRIAGE AND INSURANCE PAID TO"
+    },
+    {
+        "id": "CPT",
+        "name": "CARRIAGE PAID TO",
+        "name2": "CPT = CARRIAGE PAID TO"
+    },
+    {
+        "id": "DAF",
+        "name": "DELIVERED AT FRONTER",
+        "name2": "DAF = DELIVERED AT FRONTER"
+    },
+    {
+        "id": "DAP",
+        "name": "Delivered at Place",
+        "name2": "DAP =Delivered at Place"
+    },
+    {
+        "id": "DAT",
+        "name": "Delivered at Terminal",
+        "name2": "DAT = Delivered at Terminal"
+    },
+    {
+        "id": "DDP",
+        "name": "DELIVERED DUTY PAID",
+        "name2": "DDP = DELIVERED DUTY PAID"
+    },
+    {
+        "id": "DDU",
+        "name": "DELIVERED DUTY UNPAID",
+        "name2": "DDU = DELIVERED DUTY UNPAID"
+    },
+    {
+        "id": "DEQ",
+        "name": "DELIVERED EX QUAY",
+        "name2": "DEQ = DELIVERED EX QUAY"
+    },
+    {
+        "id": "DES",
+        "name": "DES = DELIVERED EX SHIP",
+        "name2": "DELIVERED EX SHIP"
+    },
+    {
+        "id": "EXW",
+        "name": "EX WORKS",
+        "name2": "EXW = EX WORKS"
+    },
+    {
+        "id": "FAS",
+        "name": "FREE ALONGSIDS SHIP",
+        "name2": "FAS = FREE ALONGSIDS SHIP"
+    },
+    {
+        "id": "FCA",
+        "name": "FREE CARRIER",
+        "name2": "FCA = FREE CARRIER"
+    },
+    {
+        "id": "FOB",
+        "name": "FREE ON BOARD",
+        "name2": "FOB = FREE ON BOARD"
+    }
+]

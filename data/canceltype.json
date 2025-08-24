@@ -1,0 +1,34 @@
+[
+    {
+        "id": "CLIS",
+        "name": "CLIS : ยกเลิก Container List"
+    },
+    {
+        "id": "CMAM",
+        "name": "CMAM : ยกเลิก เอกสาร Car Manifest"
+    },
+    {
+        "id": "DG",
+        "name": "DG : ยกเลิก เอกสารสินค้าอันตราย"
+    },
+    {
+        "id": "MMAM",
+        "name": "MMAM : ยกเลิก Master Sea Cargo"
+    },
+    {
+        "id": "SAOPEN",
+        "name": "SAOPEN : ยกเลิก Ship Agent Operators"
+    },
+    {
+        "id": "TGDS",
+        "name": "TGDS : ยกเลิก ใบกำกับการเคลื่อนย้ายของถ่ายลำ/ผ่านแดน"
+    },
+    {
+        "id": "TSHP",
+        "name": "TSHP : ยกเลิก เอกสารใบแนบ 9"
+    },
+    {
+        "id": "VSED",
+        "name": "VSED : ยกเลิก รายงานเรือเข้า/ออก"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "id": "AG",
+        "name": "AG - AGENT"
+    },
+    {
+        "id": "CO",
+        "name": "CO - CONCESSIONAIRE"
+    },
+    {
+        "id": "DI",
+        "name": "DI - DISTRIBUTOR"
+    },
+    {
+        "id": "MA",
+        "name": "MA - MAKER"
+    },
+    {
+        "id": "OT",
+        "name": "OT - OTHER"
+    }
+]

@@ -1,0 +1,192 @@
+[
+    {
+        "id": "20G0",
+        "name": "20G0 (20x8x8)",
+        "name1": "general container"
+    },
+    {
+        "id": "20G1",
+        "name": "20G1 (20x8x8)",
+        "name1": "general container with ventilation holes"
+    },
+    {
+        "id": "20H1",
+        "name": "20H1 (20x8x8)",
+        "name1": "port hole reefer container"
+    },
+    {
+        "id": "20T0",
+        "name": "20T0 (20x8x8)",
+        "name1": "tank container"
+    },
+    {
+        "id": "22B0",
+        "name": "22B0 (20x8x8.5)",
+        "name1": "dry bulk container"
+    },
+    {
+        "id": "22G0",
+        "name": "22G0 (20x8x8.5)",
+        "name1": "general container"
+    },
+    {
+        "id": "22G1",
+        "name": "22G1 (20x8x8.5)",
+        "name1": "general container with ventilation holes"
+    },
+    {
+        "id": "22H2",
+        "name": "22H2 (20x8x8.5)",
+        "name1": "thermal insulated external container"
+    },
+    {
+        "id": "22P1",
+        "name": "22P1 (20x8x8.5)",
+        "name1": "flat rack with fixed ends"
+    },
+    {
+        "id": "22P2",
+        "name": "22P2 (20x8x8.5)",
+        "name1": "flat with fixed corner posts only"
+    },
+    {
+        "id": "22P3",
+        "name": "22P3 (20x8x8.5)",
+        "name1": "flat with collapsible ends"
+    },
+    {
+        "id": "22P5",
+        "name": "22P5 (20x8x8.5)",
+        "name1": "open sided container"
+    },
+    {
+        "id": "22R1",
+        "name": "22R1 (20x8x8.5)",
+        "name1": "integral reefer/heated container"
+    },
+    {
+        "id": "22RO",
+        "name": "22RO (20x8x8.5)",
+        "name1": "integral reefer container"
+    },
+    {
+        "id": "22T0",
+        "name": "22T0 (20x8x8.5)",
+        "name1": "tank container - non dangerous liquid"
+    },
+    {
+        "id": "22T5",
+        "name": "22T5 (20x8x8.5)",
+        "name1": "tank container"
+    },
+    {
+        "id": "22U0",
+        "name": "22U0 (20x8x8.5)",
+        "name1": "open top container"
+    },
+    {
+        "id": "22U1",
+        "name": "22U1 (20x8x8.5)",
+        "name1": "open top container - removable top"
+    },
+    {
+        "id": "22V0",
+        "name": "22V0 (20x8x8.5)",
+        "name1": "highly ventilated container"
+    },
+    {
+        "id": "25G0",
+        "name": "25G0 (20x8x9.5)",
+        "name1": "general high cube container (9,6)"
+    },
+    {
+        "id": "25R1",
+        "name": "25R1 (20x8x9.5)",
+        "name1": "integral high cube reefer container (9,6)"
+    },
+    {
+        "id": "26T0",
+        "name": "26T0 (20x8x4)",
+        "name1": "half height tank container"
+    },
+    {
+        "id": "28P0",
+        "name": "28P0 (20x8x4)",
+        "name1": "platform flat"
+    },
+    {
+        "id": "28U1",
+        "name": "28U1 (20x8x4)",
+        "name1": "half height open top container"
+    },
+    {
+        "id": "42B0",
+        "name": "42B0 (40x8x8.5)",
+        "name1": "dry bulk container"
+    },
+    {
+        "id": "42G0",
+        "name": "42G0 (40x8x8.5)",
+        "name1": "general container"
+    },
+    {
+        "id": "42G1",
+        "name": "42G1 (40x8x8.5)",
+        "name1": "general container with ventilation holes"
+    },
+    {
+        "id": "42P1",
+        "name": "42P1 (40x8x8.5)",
+        "name1": "flat rack with fixed ends"
+    },
+    {
+        "id": "42P2",
+        "name": "42P2 (40x8x8.5)",
+        "name1": "flat with corners posts only"
+    },
+    {
+        "id": "42P3",
+        "name": "42P3 (40x8x8.5)",
+        "name1": "flat with collapsible ends"
+    },
+    {
+        "id": "42P5",
+        "name": "42P5 (40x8x8.5)",
+        "name1": "open sided container"
+    },
+    {
+        "id": "42RO",
+        "name": "42RO (40x8x8.5)",
+        "name1": "integral reefer container"
+    },
+    {
+        "id": "42U1",
+        "name": "42U1 (40x8x8.5)",
+        "name1": "open top container"
+    },
+    {
+        "id": "42V0",
+        "name": "42V0 (40x8x8.5)",
+        "name1": "highly ventilated container"
+    },
+    {
+        "id": "45G0",
+        "name": "45G0 (40x8x9.5)",
+        "name1": "general container high cube (9,6)"
+    },
+    {
+        "id": "45R1",
+        "name": "45R1 (40x8x9.5)",
+        "name1": "integral reefer container high cube (9,6)"
+    },
+    {
+        "id": "48P0",
+        "name": "48P0 (40x8x2)",
+        "name1": "platform flat"
+    },
+    {
+        "id": "48U1",
+        "name": "48U1 (40x8x4)",
+        "name1": "half height open top container"
+    }
+]
