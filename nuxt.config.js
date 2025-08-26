@@ -31,10 +31,12 @@ export default {
   css: [
     '@/assets/custom.css',
     '@/assets/custom2.css',
+    '@/assets/login.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/sweetalert2.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -49,15 +51,36 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
-  
-  // ตั้งค่า Axios Module
+
   axios: {
-    // baseURL คือ URL หลักของ Backend API ของคุณ
-    // ในระหว่างการพัฒนา คุณอาจใช้ localhost
-    // เมื่อ Deploy ขึ้น Production ต้องเปลี่ยนเป็น URL จริงของ API
-    baseURL: 'http://localhost:3001/api', // ตัวอย่าง: API ทำงานบนพอร์ต 3001
-    // proxy: true, // หากคุณต้องการใช้ proxy เพื่อแก้ปัญหา CORS หรือจัดการ base URL
+    baseURL: process.env.API_BASE_URL || "http://localhost:4000/api"
+  },
+
+  env: {
+    API_BASE_URL: process.env.API_BASE_URL || "http://localhost:4000/api",
+  },
+
+  // ตั้งค่า Auth Module
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get', propertyName: 'user' }
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/login',
+      home: '/'
+    }
   },
 
   // หากใช้ proxy (ต้องติดตั้ง @nuxtjs/proxy ด้วย: npm install @nuxtjs/proxy)

@@ -1,8 +1,0 @@
-[
-    {"id": "1", "name": "Selling Commission and Brokerage คือ ค่าบำเหน็จตัวแทนจากการขาย และค่านายหน้าหรือค่าคนกลาง"},
-    {"id": "2", "name": "The cost of containers คือ ค่าภาชนะบรรจุ"},
-    {"id": "3", "name": "The cost of packing คือ ค่าบรรจุหีบห่อ"},
-    {"id": "4", "name": "Royalties and License fees คือ ค่าสิทธิ์หรือค่าธรรมเนียมใบอนุญาต"},
-    {"id": "5", "name": "Subsequent resale คือ เงินได้จากการขายต่อในภายหลัง จากการจำหน่ายหรือการใช้ของนำเข้า"},
-    {"id": "6", "name": "Assistance คือ ค่าวัสดุเสริม (ความช่วยเหลือ)"}
-]

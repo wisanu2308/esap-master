@@ -686,7 +686,7 @@ import countryList from "@/data/country-list.json";
 import provinceList from "@/data/province-list.json";
 import terms from "@/data/trade-term.json";
 import buyerStatus from "@/data/buyer-status.json";
-import commercialLevel from "@/data/comercial-Level.json";
+import commercialLevel from "@/data/comercial-level.json";
 import weightUnit from "@/data/weight-unit.json";
 import currencyCode from "@/data/currency-code.json";
 import grossWeightDistribute from "@/data/gross-weight-distribute.json";

@@ -1,7 +1,0 @@
-[
-    {"id": "CT", "name": "Carton", "name2": "CT | Carton"},
-    {"id": "PK", "name": "Package", "name2": "PK | Package"},
-    {"id": "PX", "name": "Pallet", "name2": "PX | Pallet"},
-    {"id": "BX", "name": "Box", "name2": "BX | Box"},
-    {"id": "RO", "name": "Roll", "name2": "RO | Roll"}
-]
