@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="!$vuetify.breakpoint.mobile ? 'sticky top-64p' : ''"
+    :class="!$vuetify.breakpoint.mobile ? 'sticky' : ''"
     style="z-index: 999"
   >
     <div
@@ -9,7 +9,7 @@
           ? 'esap-header-carm'
           : 'esap-header-carm-hex'
       "
-      style="height: 120px"
+      class="p-4"
     >
       <div class="flex h-full es-container">
         <div>
@@ -31,15 +31,7 @@
         </v-btn>
         <div
           v-if="!$vuetify.breakpoint.mobile"
-          class="
-            flex
-            items-center
-            h-full
-            md:flex-row
-            flex-wrap
-            justify-start
-            mt-8
-          "
+          class="flex items-center h-full md:flex-row flex-wrap justify-start mt-8"
           v-for="menu in headerMenu"
           :key="menu.name"
         >
@@ -52,7 +44,10 @@
             :bgcolor="menu.bgColor"
           ></Core-ButtonHead>
 
-          <div v-else @click="$router.push({ path: '/carmanifest/carmcontrol' })">
+          <div
+            v-else
+            @click="$router.push({ path: '/carmanifest/carmcontrol' })"
+          >
             <Core-ButtonHead
               class="ml-3"
               :btnsave="menu.isBtnSave"
@@ -125,7 +120,7 @@ export default {
           iconColor: "#F1B44C",
           bgColor: this.bgcolor,
           isCustomIcon: true,
-        },        
+        },
         {
           name: "Export",
           icon: require("@/assets/images/svg/good/export.svg"),
@@ -146,8 +141,7 @@ export default {
           iconColor: "#F1B44C",
           bgColor: this.bgcolor,
           isCustomIcon: true,
-        },      
-        
+        },
       ],
     };
   },

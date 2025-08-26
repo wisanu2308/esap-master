@@ -1,64 +1,44 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+  <div class="min-h-screen py-12">
     <main class="container mx-auto px-4">
-      <!-- Section Title -->
-      <div class="text-center mb-16">
-        <span class="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-full mb-4">
-          Application
-        </span>
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">Applications</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          A program for everyone to use to meet their needs and maximum benefit.
-        </p>
-      </div>
-
-      <!-- Application Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        <div
-          v-for="(item, index) in appItems"
-          :key="index"
-          class="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
-        >
-          <!-- Card Content -->
-          <div class="text-center h-full flex flex-col p-10">
-            <!-- Image Container -->
-            <div class="mb-6 flex justify-center">
-              <div
-                class="rounded-2xl flex items-center justify-center "
-              >
-                <img :src="item.image" alt="" class="object-contain object-center w-full h-full rounded-2xl" />
-              </div>
-            </div>
-
-            <!-- Title -->
-            <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
-              {{ item.title }}
-            </h3>
-
-            <!-- Description -->
-            <p class="text-gray-600 text-sm leading-relaxed flex-grow mb-6">
-              {{ item.description }}
-            </p>
-
-            <!-- Link -->
-            <NuxtLink
-              :to="item.url"
-              :target="item.external ? '_blank' : '_self'"
-              class="absolute inset-0 z-10"
-              aria-label="item.title"
-            >
-              <span class="sr-only">{{ item.title }}</span>
-            </NuxtLink>
-
-            <!-- Hover Effect Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+      <div class="pb-4">
+        <!-- Section Header -->
+        <div class="text-center relative mb-10">
+          <div
+            class="relative z-10 text-slate-200 text-5xl font-medium font-wider py-2 px-4 rounded-full uppercase tracking-widest translate-y-8"
+          >
+            Application
           </div>
+          <div
+            class="relative z-20 uppercase text-4xl font-bold mb-4 tracking-widest"
+          >
+            Application
+          </div>
+          <div class="text-xl">
+            A program for everyone to use to meet their needs and maximum
+            benefit.
+          </div>
+        </div>
 
-          <!-- Highlighted Border for Featured Item -->
-          <div 
-            v-if="index === 1" 
-            class="absolute inset-0 rounded-3xl border-4 border-blue-400 pointer-events-none"
-          ></div>
+        <div class="container-fluid">
+          <div class="grid grid-cols-3 gap-4">
+            <ApplicationCard
+              v-for="(item, index) in applicationItems"
+              :key="index"
+              :image="
+                applicationFiltered.find(
+                  (icon) => icon.code === item.ApplicationCode
+                )?.src || '/img/logo.png'
+              "
+              :title="item.ApplicationName"
+              :description="item.OwnerName"
+              :url="
+                applicationFiltered.find(
+                  (icon) => icon.code === item.ApplicationCode
+                )?.appUrl || '#'
+              "
+            />
+          </div>
         </div>
       </div>
     </main>
@@ -67,67 +47,134 @@
 
 <script>
 export default {
+  layout: "portal",
   name: "IndexPage",
   middleware: "auth",
   data() {
     return {
       isScrolled: false,
-      appItems: [
+      applicationFiltered: [
         {
-          title: "Import Declaration",
-          description:
-            "A program for sending information on importing goods into Thailand to the Customs Department.",
-          image: require(`~/assets/img/Import.png`),
-          url: "/import/",
-          external: true,
+          code: "ESAPImport",
+          src: "/img/Import.png",
+          appUrl: "/import/welcomeimport",
         },
         {
-          title: "ESAP Export Dec.",
-          description:
-            "A program for sending information on exporting goods take out Thailand to the Customs Department.",
-          image: require(`~/assets/img/Export.png`),
-          url: "/export/",
-          external: true,
+          code: "ESAPExport",
+          src: "/img/Export.png",
+          appUrl: "/export/welcomeexport",
         },
         {
-          title: "ESAP Goods Control",
-          description:
-            "A program for creating a systematic shipping invoice in the form of electronic export without documents and Issuing GCL documents.",
-          image: require(`~/assets/img/Goods.png`),
-          url: "/goods/",
-          external: true,
+          code: "ESAPGoods",
+          src: "/img/Goods.png",
+          appUrl: "/goods/welcomegoods",
         },
         {
-          title: "ESAP FDA Restricted Goods",
-          description:
-            "Data transmission program, license, agency, Food and Drug Administration.",
-          image: require(`~/assets/img/rgp.png`),
-          url: "/fdapermit/",
-          external: true,
+          code: "ESAPCarManifest",
+          src: "/img/Car.png",
+          appUrl: "/carmanifest/welcomecar",
         },
         {
-          title: "ESAP Car Manifest",
-          description:
-            "Vehicle movement data transmission program for entering and leaving the Kingdom of Thailand.",
-          image: require(`~/assets/img/car.png`),
-          url: "/carmanifest/",
-          external: true,
+          code: "ESAPTransit",
+          src: "/img/Transit.png",
+          appUrl: "#",
         },
         {
-          title: "ESAP EXPRESS Massage",
-          description:
-            "An express cargo data transmission program for import and export into the Kingdom of Thailand.",
-          image: require(`~/assets/img/Express.png`),
-          url: "/express/",
-          external: true,
+          code: "ESAPRGP",
+          src: "/img/RGP.png",
+          appUrl: "/fdapermit/welcomefda",
         },
         {
-          title: "ESAP Transit,Transsipment Doc.",
-          description:
-            "Cross-border goods data transmission program for import and export into the Kingdom of Thailand.",
-          image: require(`~/assets/img/Transit.png`),
-          url: "/transit/",
-          external: true,
+          code: "ESAPExpress",
+          src: "/img/Express.png",
+          appUrl: "#",
+        },
+        {
+          code: "ESAPAirManifest",
+          src: "/img/logo.png",
+          appUrl: "#",
+        },
+      ],
+      applicationItems: [
+        {
+          id: 1,
+          ApplicationCode: "ESAPImport",
+          ApplicationName: "Import Declaration System",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 2,
+          ApplicationCode: "ESAPExport",
+          ApplicationName: "Export Declaration System",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 3,
+          ApplicationCode: "ESAPGoods",
+          ApplicationName: "Goods Transition",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 4,
+          ApplicationCode: "ESAPCarManifest",
+          ApplicationName: "Car Manifest System",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 5,
+          ApplicationCode: "ESAPTransit",
+          ApplicationName: "Transit and Transshipment System",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 6,
+          ApplicationCode: "ESAPRGP",
+          ApplicationName: "Restricted Goods Permit",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 7,
+          ApplicationCode: "ESAPExpress",
+          ApplicationName: "Express Cargo System",
+          Version: "1.0.0.0",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
+        },
+        {
+          id: 8,
+          ApplicationCode: "ESAPAirManifest",
+          ApplicationName: "Air Manifest System",
+          Version: "1.0.0.1",
+          OwnerName: "EDI SERVICE APPLICATION PROVIDER CO.,LTD.",
+          StartDate: "2025-08-26T02:17:40.938Z",
+          EndDate: "9999-09-08T17:00:00.000Z",
+          Active: true,
         },
       ],
     };
@@ -176,39 +223,160 @@ export default {
     }
   },
   methods: {
+    // ApplicationCards event handlers
+    handleCardClick(item) {
+      console.log("Card clicked:", item.title);
+
+      // Show loading state
+      this.$set(item, "loading", true);
+
+      // Simulate loading delay
+      setTimeout(() => {
+        this.$set(item, "loading", false);
+
+        // Navigate if not disabled
+        if (!item.disabled && item.url) {
+          if (item.external) {
+            window.open(item.url, "_blank");
+          } else {
+            this.$router.push(item.url);
+          }
+        }
+      }, 1000);
+    },
+
+    handleActionClick(item) {
+      console.log("Action clicked:", item.title);
+
+      // Show notification for disabled items
+      if (item.disabled) {
+        this.$toast.info(`${item.title} is currently under maintenance`);
+        return;
+      }
+
+      // Handle different action types
+      if (item.status === "pending") {
+        this.$toast.warning(`${item.title} is pending approval`);
+        return;
+      }
+
+      this.handleCardClick(item);
+    },
+
+    handleMenuAction({ item, action }) {
+      console.log("Menu action:", action, "for item:", item.title);
+
+      switch (action) {
+        case "info":
+          this.showApplicationInfo(item);
+          break;
+        case "bookmark":
+          this.$toast.success(`${item.title} has been bookmarked`);
+          break;
+        case "remove-bookmark":
+          this.$toast.info(`${item.title} has been removed from bookmarks`);
+          break;
+        default:
+          console.log("Unknown action:", action);
+      }
+    },
+
+    handleShowInfo(item) {
+      // Show detailed information about the application
+      this.$dialog.notify.info({
+        title: item.title,
+        text: `
+          <div>
+            <p><strong>Description:</strong> ${item.description}</p>
+            <p><strong>Status:</strong> ${this.getStatusText(item.status)}</p>
+            <p><strong>Type:</strong> ${
+              item.external ? "External" : "Internal"
+            }</p>
+            ${
+              item.featured
+                ? "<p><strong>Featured Application</strong></p>"
+                : ""
+            }
+          </div>
+        `,
+        persistent: true,
+      });
+    },
+
+    handleBookmarkChanged({ item, bookmarked }) {
+      console.log("Bookmark changed:", item.title, bookmarked);
+
+      // You can save bookmark state to localStorage or API here
+      if (process.client) {
+        const bookmarks = JSON.parse(
+          localStorage.getItem("appBookmarks") || "[]"
+        );
+
+        if (bookmarked) {
+          if (!bookmarks.includes(item.title)) {
+            bookmarks.push(item.title);
+          }
+        } else {
+          const index = bookmarks.indexOf(item.title);
+          if (index > -1) {
+            bookmarks.splice(index, 1);
+          }
+        }
+
+        localStorage.setItem("appBookmarks", JSON.stringify(bookmarks));
+      }
+    },
+
+    getStatusText(status) {
+      const statusTexts = {
+        active: "Active",
+        inactive: "Inactive",
+        pending: "Pending Approval",
+        maintenance: "Under Maintenance",
+      };
+      return statusTexts[status] || status;
+    },
+
+    showApplicationInfo(item) {
+      // Implementation for showing application details
+      console.log("Showing info for:", item.title);
+    },
+
     getCardClasses(index) {
       // Highlight the Export card (index 1) with border
       return {
-        'ring-4 ring-blue-400 ring-opacity-50': index === 1,
+        "ring-4 ring-blue-400 ring-opacity-50": index === 1,
       };
     },
 
     getIconClasses(index) {
       const colorClasses = [
-        'bg-gradient-to-br from-orange-400 to-orange-500', // Import - Orange
-        'bg-gradient-to-br from-purple-400 to-purple-500', // Export - Purple  
-        'bg-gradient-to-br from-purple-500 to-purple-600', // Goods - Purple
-        'bg-gradient-to-br from-green-400 to-green-500',   // RGP - Green
-        'bg-gradient-to-br from-yellow-400 to-yellow-500', // Car - Yellow
-        'bg-gradient-to-br from-red-500 to-red-600',       // Express - Red
-        'bg-gradient-to-br from-blue-400 to-blue-500',     // Transit - Blue
+        "bg-gradient-to-br from-orange-400 to-orange-500", // Import - Orange
+        "bg-gradient-to-br from-purple-400 to-purple-500", // Export - Purple
+        "bg-gradient-to-br from-purple-500 to-purple-600", // Goods - Purple
+        "bg-gradient-to-br from-green-400 to-green-500", // RGP - Green
+        "bg-gradient-to-br from-yellow-400 to-yellow-500", // Car - Yellow
+        "bg-gradient-to-br from-red-500 to-red-600", // Express - Red
+        "bg-gradient-to-br from-blue-400 to-blue-500", // Transit - Blue
       ];
-      
-      return colorClasses[index] || 'bg-gradient-to-br from-gray-400 to-gray-500';
+
+      return (
+        colorClasses[index] || "bg-gradient-to-br from-gray-400 to-gray-500"
+      );
     },
 
     getIconText(title) {
       const iconMap = {
-        'Import Declaration': 'Im',
-        'ESAP Export Dec.': 'Ex',
-        'ESAP Goods Control': 'Goods',
-        'ESAP FDA Restricted Goods': 'RGP',
-        'ESAP Car Manifest': 'Car',
-        'ESAP EXPRESS Massage': 'Express',
-        'ESAP Transit,Transsipment Doc.': 'Transit'
+        "Import Declaration": "Im",
+        "ESAP Export Dec.": "Ex",
+        "ESAP Goods Control": "Goods",
+        "ESAP FDA Restricted Goods": "RGP",
+        "ESAP Car Manifest": "Car",
+        "ESAP EXPRESS Massage": "Express",
+        "ESAP Transit,Transsipment Doc.": "Transit",
       };
-      
-      return iconMap[title] || 'App';
+
+      return iconMap[title] || "App";
     },
 
     logout() {
@@ -339,37 +507,59 @@ export default {
 <style scoped>
 /* Custom animations and enhancements for Tailwind */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.application-cards {
+  padding: 20px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 16px;
+  letter-spacing: -0.025em;
+}
+
+.section-description {
+  font-size: 1.1rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Section Header Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header-badge {
+  margin-bottom: 16px;
+}
+
+.badge-text {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .group:hover .icon-container {
   animation: float 2s ease-in-out infinite;
-}
-
-/* Enhanced shadow for cards */
-.group:hover {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Smooth gradient transitions */
-.bg-gradient-to-br {
-  background-size: 200% 200%;
-  transition: all 0.3s ease;
-}
-
-.group:hover .bg-gradient-to-br {
-  background-position: right center;
-}
-
-/* Typography enhancements */
-.text-4xl {
-  letter-spacing: -0.025em;
-}
-
-/* Card border radius enhancement */
-.rounded-3xl {
-  border-radius: 1.5rem;
 }
 
 /* Icon container enhancement */
@@ -381,23 +571,9 @@ export default {
   transform: scale(1.1) rotate(-5deg);
 }
 
-/* Responsive grid adjustments */
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 /* Enhanced focus states for accessibility */
 .group:focus-within {
-  outline: 2px solid #3B82F6;
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
@@ -409,7 +585,11 @@ export default {
 }
 
 @keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 </style>

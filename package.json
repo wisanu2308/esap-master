@@ -15,7 +15,6 @@
     "@types/multer": "^2.0.0",
     "core-js": "^3.19.3",
     "dayjs-nuxt": "^2.1.11",
-    "express": "^5.1.0",
     "multer": "^2.0.2",
     "numeral": "2.0.6",
     "nuxt": "^2.15.8",

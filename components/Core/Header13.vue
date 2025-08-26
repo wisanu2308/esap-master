@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="!$vuetify.breakpoint.mobile ? 'sticky top-64p' : ''"
+    :class="!$vuetify.breakpoint.mobile ? 'sticky' : ''"
     style="z-index: 999"
   >
     <div
@@ -9,7 +9,7 @@
           ? 'esap-header-fda'
           : 'esap-header-fda-hex'
       "
-      style="height: 140px"
+      class="p-4"
     >
       <div class="flex h-full es-container">
         <div>

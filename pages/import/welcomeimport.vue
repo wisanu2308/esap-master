@@ -4,7 +4,7 @@
       <h1 class="welcome-title">WELCOME TO IMPORT APPLICATION </h1>
       
       <div class="button-group">
-        <NuxtLink to="/" class="action-button primary">
+        <NuxtLink to="/import" class="action-button primary">
           START PROGRAM
         </NuxtLink>        
       </div>

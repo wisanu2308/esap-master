@@ -36,7 +36,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/sweetalert2.js'
+    '~/plugins/sweetalert2.js',
+    '~/plugins/auth.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
