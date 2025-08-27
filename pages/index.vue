@@ -1,47 +1,33 @@
 <template>
-  <div class="min-h-screen py-12">
-    <main class="container mx-auto px-4">
-      <div class="pb-4">
-        <!-- Section Header -->
-        <div class="text-center relative mb-10">
-          <div
-            class="relative z-10 text-slate-200 text-5xl font-medium font-wider py-2 px-4 rounded-full uppercase tracking-widest translate-y-8"
-          >
-            Application
-          </div>
-          <div
-            class="relative z-20 uppercase text-4xl font-bold mb-4 tracking-widest"
-          >
-            Application
-          </div>
-          <div class="text-xl">
-            A program for everyone to use to meet their needs and maximum
-            benefit.
-          </div>
-        </div>
+  <div class="min-h-screen py-32">
+    <div class="container mx-auto px-4 pb-4">
+      <!-- Section Header -->
+      <PageTitle
+        title="Application"
+        description="A platform for managing applications"
+      />
 
-        <div class="container-fluid">
-          <div class="grid grid-cols-3 gap-4">
-            <ApplicationCard
-              v-for="(item, index) in applicationItems"
-              :key="index"
-              :image="
-                applicationFiltered.find(
-                  (icon) => icon.code === item.ApplicationCode
-                )?.src || '/img/logo.png'
-              "
-              :title="item.ApplicationName"
-              :description="item.OwnerName"
-              :url="
-                applicationFiltered.find(
-                  (icon) => icon.code === item.ApplicationCode
-                )?.appUrl || '#'
-              "
-            />
-          </div>
+      <div class="container-fluid">
+        <div class="w-full md:w-3/4 mx-auto grid grid-cols-3 gap-4">
+          <ApplicationCard
+            v-for="(item, index) in applicationItems"
+            :key="index"
+            :image="
+              applicationFiltered.find(
+                (icon) => icon.code === item.ApplicationCode
+              )?.src || '/img/logo.png'
+            "
+            :title="item.ApplicationName"
+            :description="item.OwnerName"
+            :url="
+              applicationFiltered.find(
+                (icon) => icon.code === item.ApplicationCode
+              )?.appUrl || '#'
+            "
+          />
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
