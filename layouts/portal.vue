@@ -1,7 +1,9 @@
 <template>
   <div class="">
     <PortalNavMenu />
-    <Nuxt class="xl:mx-auto xl:container" />
+    <div class="min-h-screen py-32">
+      <Nuxt class="container mx-auto px-4 pb-4" />
+    </div>
     <!-- <v-main>
       <div class="pt-16 bg-slate-100 smooth-scroll">
         <Nuxt />
@@ -16,7 +18,6 @@
 </template>
 
 <script>
-
 export default {
   name: "DefaultLayout",
 

@@ -1,31 +1,29 @@
 <template>
-  <div class="min-h-screen py-32">
-    <div class="container mx-auto px-4 pb-4">
-      <!-- Section Header -->
-      <PageTitle
-        title="Application"
-        description="A platform for managing applications"
-      />
+  <div>
+    <!-- Section Header -->
+    <PageTitle
+      title="Application"
+      description="A platform for managing applications"
+    />
 
-      <div class="container-fluid">
-        <div class="w-full md:w-3/4 mx-auto grid grid-cols-3 gap-4">
-          <ApplicationCard
-            v-for="(item, index) in applicationItems"
-            :key="index"
-            :image="
-              applicationFiltered.find(
-                (icon) => icon.code === item.ApplicationCode
-              )?.src || '/img/logo.png'
-            "
-            :title="item.ApplicationName"
-            :description="item.OwnerName"
-            :url="
-              applicationFiltered.find(
-                (icon) => icon.code === item.ApplicationCode
-              )?.appUrl || '#'
-            "
-          />
-        </div>
+    <div class="container-fluid">
+      <div class="w-full md:w-3/4 mx-auto grid grid-cols-3 gap-4">
+        <ApplicationCard
+          v-for="(item, index) in applicationItems"
+          :key="index"
+          :image="
+            applicationFiltered.find(
+              (icon) => icon.code === item.ApplicationCode
+            )?.src || '/img/logo.png'
+          "
+          :title="item.ApplicationName"
+          :description="item.OwnerName"
+          :url="
+            applicationFiltered.find(
+              (icon) => icon.code === item.ApplicationCode
+            )?.appUrl || '#'
+          "
+        />
       </div>
     </div>
   </div>

@@ -100,20 +100,12 @@
             </div>
           </div>
 
-          <!-- Sign Out Button -->
-          <button
-            @click="logout"
-            class="text-gray-700 hover:text-cyan-300 px-3 py-2 text-sm font-thin transition-colors flex items-center"
-          >
-            Sign Out
-          </button>
-
           <!-- User Auth Section -->
           <div class="relative ml-3">
             <button
               @click="userDropdownOpen = !userDropdownOpen"
               class="bg-gradient-to-r from-cyan-300 to-cyan-700 text-white px-4 py-2 rounded-full text-sm font-thin hover:from-cyan-700 hover:to-cyan-800 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
-              >
+            >
               <i class="bi bi-person-circle"></i>
               <span>{{ displayName }}</span>
               <svg
@@ -145,13 +137,13 @@
                   </div>
                 </div>
                 <a
-                  href="/profile"
+                  href="#"
                   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-300 transition-colors"
                 >
                   <i class="bi bi-person mr-2"></i>Profile
                 </a>
                 <a
-                  href="/settings"
+                  href="#"
                   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-300 transition-colors"
                 >
                   <i class="bi bi-gear mr-2"></i>Settings
@@ -202,10 +194,7 @@
               </button>
 
               <!-- Sub Menu Items -->
-              <div
-                v-show="openMobileSubMenus[index]"
-                class="space-y-1"
-              >
+              <div v-show="openMobileSubMenus[index]" class="space-y-1">
                 <NuxtLink
                   v-for="(subItem, subIndex) in item.items"
                   :key="subIndex"
@@ -250,6 +239,10 @@ export default {
       userDropdownOpen: false, // Track user dropdown state
       dropdownTimeouts: {}, // Track timeout IDs for delayed hiding
 
+      // Auth
+      username: null,
+      userInfo: null,
+
       menuItems: [
         {
           title: "Home",
@@ -258,7 +251,7 @@ export default {
         },
         {
           title: "Application",
-          link: "/application",
+          link: "/",
           items: [],
         },
         {
@@ -297,11 +290,11 @@ export default {
 
     // Helper computed properties
     displayName() {
-      return this.username || "User";
+      return this.username || "Username";
     },
 
     companyName() {
-      return this.userInfo?.company || "Company";
+      return this.userInfo?.company || "CompanyName";
     },
   },
 
@@ -382,7 +375,7 @@ export default {
 
   // Clean up timeouts when component is destroyed
   beforeDestroy() {
-    Object.values(this.dropdownTimeouts).forEach(timeout => {
+    Object.values(this.dropdownTimeouts).forEach((timeout) => {
       clearTimeout(timeout);
     });
   },
