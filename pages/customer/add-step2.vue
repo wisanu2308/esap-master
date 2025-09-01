@@ -245,30 +245,10 @@
         <!-- Action Buttons Section -->
         <div class="mb-8">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button
-              @click="handleAddUserLogin"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-            >
-              UserLogin
-            </button>
-            <button
-              @click="handleAddProfile"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-            >
-              Profile
-            </button>
-            <button
-              @click="handleAddCertificate"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-            >
-              Certificate
-            </button>
-            <button
-              @click="handleSettingConfig"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-            >
-              Setting Config
-            </button>
+            <UserLoginModal />
+            <ProfileModal />
+            <CertificateModal />
+            <SettingConfigModal />
           </div>
         </div>
 
@@ -385,10 +365,10 @@ export default {
         const result = await this.$store.dispatch("customer/saveCustomer");
 
         if (result.success) {
-        //   this.$toast.success("Customer saved successfully!");
+          //   this.$toast.success("Customer saved successfully!");
           this.$router.push("/customers"); // Redirect to customer list
         } else {
-        //   this.$toast.error("Failed to save customer");
+          //   this.$toast.error("Failed to save customer");
         }
       } catch (error) {
         console.error("Error saving customer:", error);
@@ -418,26 +398,6 @@ export default {
       }
     },
 
-    // Placeholder methods for action buttons
-    handleAddUserLogin() {
-      //   this.$toast.info("Add UserLogin functionality not implemented yet");
-      console.log("Add UserLogin functionality not implemented yet");
-    },
-
-    handleAddProfile() {
-      //   this.$toast.info("Add Profile functionality not implemented yet");
-      console.log("Add Profile functionality not implemented yet");
-    },
-
-    handleAddCertificate() {
-      //   this.$toast.info("Add Certificate functionality not implemented yet");
-      console.log("Add Certificate functionality not implemented yet");
-    },
-
-    handleSettingConfig() {
-      //   this.$toast.info("Setting Config functionality not implemented yet");
-      console.log("Add Setting Config functionality not implemented yet");
-    },
   },
 
   // Set current step when component mounts
