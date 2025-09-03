@@ -74,8 +74,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import CustomerFormStep1 from "~/components/customer/CustomerFormStep1.vue";
-import CustomerFormStep2 from "~/components/customer/CustomerFormStep2.vue";
+import CustomerFormStep1 from "~/components/Customer/CustomerFormStep1.vue";
+import CustomerFormStep2 from "~/components/Customer/CustomerFormStep2.vue";
 
 export default {
   name: "EditCustomerPage",

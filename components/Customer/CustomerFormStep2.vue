@@ -9,9 +9,7 @@
 
     <!-- Address Details Section -->
     <div class="mb-8">
-      <h3 class="text-lg font-medium text-gray-700 mb-4">
-        Address Details
-      </h3>
+      <h3 class="text-lg font-medium text-gray-700 mb-4">Address Details</h3>
 
       <!-- Address Thai Row -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -93,8 +91,13 @@
       </h3>
 
       <!-- Loading State -->
-      <div v-if="loadingApplications" class="flex justify-center items-center py-8">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div
+        v-if="loadingApplications"
+        class="flex justify-center items-center py-8"
+      >
+        <div
+          class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
+        ></div>
       </div>
 
       <!-- Applications Grid -->
@@ -105,9 +108,9 @@
             {{ group.title }}
           </h4>
           <div class="space-y-3">
-            <label 
-              v-for="app in group.applications" 
-              :key="app.id" 
+            <label
+              v-for="app in group.applications"
+              :key="app.id"
               class="flex items-center"
             >
               <input
@@ -129,8 +132,8 @@
       <!-- Error State -->
       <div v-if="applicationError" class="text-center py-8">
         <p class="text-red-600">{{ applicationError }}</p>
-        <button 
-          @click="fetchApplications" 
+        <button
+          @click="fetchApplications"
           class="mt-2 text-blue-600 hover:text-blue-800"
         >
           Try Again
@@ -141,7 +144,7 @@
     <!-- Action Buttons Section -->
     <div class="mb-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <UserLoginModal />
+        <UserLoginModal :customerId="customerId" :customerData="customerData" />
         <ProfileModal />
         <CertificateModal />
         <SettingConfigModal />
@@ -181,7 +184,7 @@
             :disabled="isLoading"
             class="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50"
           >
-            {{ isLoading ? 'Updating...' : 'Submit' }}
+            {{ isLoading ? "Updating..." : "Submit" }}
           </button>
         </div>
         <button
@@ -196,22 +199,36 @@
 </template>
 
 <script>
+
+import UserLoginModal from "~/components/Customer/UserLoginModal.vue";
+import ProfileModal from "~/components/Customer/ProfileModal.vue";
+import CertificateModal from "~/components/Customer/CertificateModal.vue";
+import SettingConfigModal from "~/components/Customer/SettingConfigModal.vue";
+
 export default {
   name: "CustomerFormStep2",
   props: {
     customerId: {
       type: [String, Number],
-      required: true
+      required: true,
     },
     initialData: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     isEditMode: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
+
+  components: {
+    UserLoginModal,
+    ProfileModal,
+    CertificateModal,
+    SettingConfigModal,
+  },
+
   data() {
     return {
       isLoading: false,
@@ -225,8 +242,8 @@ export default {
         addressEng1: "",
         addressEng2: "",
         postCode: "",
-        selectedApplications: []
-      }
+        selectedApplications: [],
+      },
     };
   },
 
@@ -234,22 +251,25 @@ export default {
     applicationGroups() {
       // จัดกลุ่ม applications (สามารถปรับได้ตามความต้องการ)
       const itemsPerGroup = Math.ceil(this.applications.length / 3);
-      
+
       return [
         {
           title: "Core Applications",
-          applications: this.applications.slice(0, itemsPerGroup)
+          applications: this.applications.slice(0, itemsPerGroup),
         },
         {
-          title: "Extended Services", 
-          applications: this.applications.slice(itemsPerGroup, itemsPerGroup * 2)
+          title: "Extended Services",
+          applications: this.applications.slice(
+            itemsPerGroup,
+            itemsPerGroup * 2
+          ),
         },
         {
           title: "Additional Tools",
-          applications: this.applications.slice(itemsPerGroup * 2)
-        }
-      ].filter(group => group.applications.length > 0);
-    }
+          applications: this.applications.slice(itemsPerGroup * 2),
+        },
+      ].filter((group) => group.applications.length > 0);
+    },
   },
 
   watch: {
@@ -257,27 +277,29 @@ export default {
       handler(newData) {
         // ป้องกันการ reset form data เมื่อมีการอัพเดท
         if (newData && Object.keys(newData).length > 0) {
-          this.formData = { 
-            ...this.formData, 
+          this.formData = {
+            ...this.formData,
             ...newData,
             // ถ้ามี EnabledApps ใน initialData ให้แปลงเป็น selectedApplications
-            selectedApplications: newData.EnabledApps ? 
-              this.convertEnabledAppsToSelectedIds(newData.EnabledApps) : 
-              this.formData.selectedApplications
+            selectedApplications: newData.EnabledApps
+              ? this.convertEnabledAppsToSelectedIds(newData.EnabledApps)
+              : this.formData.selectedApplications,
           };
         }
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
 
   async mounted() {
     await this.fetchApplications();
-    
+
     // หลังจากโหลด applications แล้ว ถ้ามี initialData ให้ set ค่า
     if (this.initialData && this.initialData.EnabledApps) {
-      this.formData.selectedApplications = this.convertEnabledAppsToSelectedIds(this.initialData.EnabledApps);
+      this.formData.selectedApplications = this.convertEnabledAppsToSelectedIds(
+        this.initialData.EnabledApps
+      );
     }
   },
 
@@ -287,14 +309,14 @@ export default {
       this.applicationError = null;
 
       try {
-        const response = await this.$axios.get('/esap-application');
+        const response = await this.$axios.get("/esap-application");
         if (response.data.success) {
           // กรองเฉพาะ applications ที่ active
-          this.applications = response.data.data.filter(app => app.Active);
+          this.applications = response.data.data.filter((app) => app.Active);
         }
       } catch (error) {
-        console.error('Error fetching applications:', error);
-        this.applicationError = 'Failed to load applications';
+        console.error("Error fetching applications:", error);
+        this.applicationError = "Failed to load applications";
       } finally {
         this.loadingApplications = false;
       }
@@ -302,20 +324,24 @@ export default {
 
     convertEnabledAppsToSelectedIds(enabledApps) {
       if (!enabledApps || !Array.isArray(enabledApps)) return [];
-      
+
       // แปลง EnabledApps เป็น array ของ IDs
-      return enabledApps.map(app => {
-        // ถ้า app เป็น object ที่มี id
-        if (typeof app === 'object' && app.id) {
-          return app.id;
-        }
-        // ถ้า app เป็น string หา id จาก applications
-        if (typeof app === 'string') {
-          const foundApp = this.applications.find(a => a.ApplicationName === app);
-          return foundApp ? foundApp.id : null;
-        }
-        return app;
-      }).filter(id => id !== null);
+      return enabledApps
+        .map((app) => {
+          // ถ้า app เป็น object ที่มี id
+          if (typeof app === "object" && app.id) {
+            return app.id;
+          }
+          // ถ้า app เป็น string หา id จาก applications
+          if (typeof app === "string") {
+            const foundApp = this.applications.find(
+              (a) => a.ApplicationName === app
+            );
+            return foundApp ? foundApp.id : null;
+          }
+          return app;
+        })
+        .filter((id) => id !== null);
     },
 
     handleApplicationChange() {
@@ -335,17 +361,20 @@ export default {
           AddressEng2: this.formData.addressEng2,
           Province: this.formData.province,
           PostCode: this.formData.postCode,
-          EnabledApps: this.formData.selectedApplications
+          EnabledApps: this.formData.selectedApplications,
         };
 
         // เรียก API update customer
-        const response = await this.$axios.patch(`/customers/${this.customerId}`, updateData);
+        const response = await this.$axios.patch(
+          `/customers/${this.customerId}`,
+          updateData
+        );
 
         if (response.data.success) {
           this.$emit("step2-completed", {
             customerId: this.customerId,
             formData: this.formData,
-            customerData: response.data.data
+            customerData: response.data.data,
           });
 
           if (!this.isEditMode) {
@@ -358,17 +387,13 @@ export default {
         }
       } catch (error) {
         console.error("Error updating customer:", error);
-        
+
         let errorMessage = "Failed to update customer";
         if (error.response?.data?.message) {
           errorMessage = error.response.data.message;
         }
 
-        this.$swal.fire(
-          "Error!",
-          errorMessage,
-          "error"
-        );
+        this.$swal.fire("Error!", errorMessage, "error");
       } finally {
         this.isLoading = false;
       }
@@ -383,11 +408,11 @@ export default {
           addressEng1: "",
           addressEng2: "",
           postCode: "",
-          selectedApplications: []
+          selectedApplications: [],
         };
         this.$emit("clear-data");
       }
-    }
-  }
+    },
+  },
 };
 </script>
