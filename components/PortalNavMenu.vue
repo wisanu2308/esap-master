@@ -259,8 +259,8 @@ export default {
           link: "#systems",
           items: [
             {
-              title: "Add Customer",
-              link: "/customer/add",
+              title: "Customer",
+              link: "/customer",
               icon: "bi bi-person-plus",
             },
             { title: "Settings", link: "/settings", icon: "bi bi-gear" },
