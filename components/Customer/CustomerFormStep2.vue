@@ -220,6 +220,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    // เพิ่ม customerData prop
+    customerData: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   components: {
