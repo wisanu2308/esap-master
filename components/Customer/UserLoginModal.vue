@@ -361,12 +361,12 @@ export default {
               },
             });
 
-            console.log("Customer Response:", customerResponse);
+            // console.log("Customer Response:", customerResponse);
 
             if (customerResponse.ok) {
               const customerResult = await customerResponse.json();
               const customerData = customerResult.data;
-              console.log("Customer Data:", customerData);
+              // console.log("Customer Data:", customerData);
               
               // กำหนดข้อมูล customer ใน form
               this.form.CustomerID = customerData.CustomerID || customerData.id || "";
