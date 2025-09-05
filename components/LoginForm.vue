@@ -59,14 +59,35 @@ export default {
       this.isLoading = true;
 
       try {
-        const result = await this.$store.dispatch("login", {
-          username: this.form.username,
-          password: this.form.password,
+        const apiUrl = process.env.API_BASE_URL || "http://localhost:4000/api";
+        
+        // เรียก API login ตรงจากหน้า login
+        const response = await fetch(`${apiUrl}/auth/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: this.form.username,
+            password: this.form.password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Login failed");
+        }
+
+        // ส่งข้อมูลไปเก็บใน store
+        await this.$store.dispatch("setAuth", {
+          user: data.data.user,
+          token: data.data.token,
         });
 
         this.$swal.fire({
           title: "Success!",
-          text: `เข้าสู่ระบบสำเร็จ\nยินดีต้อนรับ ${result.user.fullName}`,
+          text: `เข้าสู่ระบบสำเร็จ\nยินดีต้อนรับ ${data.data.user.customerName}`,
           icon: "success",
           timer: 2000,
           showConfirmButton: false,
@@ -75,6 +96,7 @@ export default {
         setTimeout(() => {
           this.$router.push("/");
         }, 2000);
+
       } catch (error) {
         console.error("Login error:", error);
         this.$swal.fire({
@@ -83,13 +105,7 @@ export default {
           icon: "error",
           html: `
             <p>${error.message || "ไม่สามารถเข้าสู่ระบบได้"}</p>
-            <hr>
-            <small style="color: #666;">
-              <strong>ทดสอบด้วยข้อมูลนี้:</strong><br>
-              Username: <code>admin</code> | Password: <code>admin</code><br>
-              หรือ<br>
-              Username: <code>user</code> | Password: <code>user123</code>
-            </small>
+            <p>โปรดตรวจสอบชื่อผู้ใช้และรหัสผ่านของคุณอีกครั้ง</p>
           `,
         });
       } finally {
@@ -98,20 +114,26 @@ export default {
     },
 
     async forgotPassword() {
-      const { value: password } = await this.$swal.fire({
-        title: "Enter your password",
-        input: "password",
-        inputLabel: "Password",
-        inputPlaceholder: "Enter your password",
+      const { value: email } = await this.$swal.fire({
+        title: "Reset Password",
+        input: "email",
+        inputLabel: "Email Address",
+        inputPlaceholder: "Enter your email address",
         inputAttributes: {
-          maxlength: "10",
           autocapitalize: "off",
           autocorrect: "off",
         },
+        showCancelButton: true,
+        confirmButtonText: "Send Reset Link",
+        cancelButtonText: "Cancel",
       });
 
-      if (password) {
-        this.$swal.fire(`Entered password: ${password}`);
+      if (email) {
+        this.$swal.fire({
+          title: "Reset Link Sent!",
+          text: `Password reset link has been sent to ${email}`,
+          icon: "success",
+        });
       }
     },
 

@@ -25,85 +25,63 @@ export const mutations = {
 }
 
 export const actions = {
-  // Initialize app และเรียก initAuth
-  async nuxtServerInit({ dispatch }) {
-    // ฟังก์ชันนี้จะทำงานเมื่อ server-side rendering
-    // สำหรับ SPA mode จะไม่ทำงาน แต่เราจะใช้ plugin แทน
-  },
-
-  // จำลอง login action
-  async login({ commit }, { username, password }) {
-    // จำลองการเรียก API
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // ตรวจสอบข้อมูล login แบบจำลอง
-        if (username === 'admin' && password === 'admin') {
-          const mockUser = {
-            id: 1,
-            username: 'admin',
-            name: 'System Administrator',
-            email: 'admin@esap.com',
-            role: 'administrator',
-            company: 'ESAP Admin',
-            fullName: 'System Administrator'
-          }
-          const mockToken = 'mock-jwt-token-' + Date.now()
-          
-          // บันทึกข้อมูลใน store
-          commit('SET_AUTH', { user: mockUser, token: mockToken })
-          
-          // บันทึกใน localStorage (สำหรับจำลอง persistence)
-          if (process.client) {
-            localStorage.setItem('auth.token', mockToken)
-            localStorage.setItem('auth.user', JSON.stringify(mockUser))
-            localStorage.setItem('isLoggedIn', 'true')
-          }
-          
-          resolve({ user: mockUser, token: mockToken })
-        } else if (username === 'user' && password === 'user123') {
-          const mockUser = {
-            id: 2,
-            username: 'user',
-            name: 'Regular User',
-            email: 'user@esap.com',
-            role: 'user',
-            company: 'ESAP Company',
-            fullName: 'Regular User'
-          }
-          const mockToken = 'mock-jwt-token-' + Date.now()
-          
-          commit('SET_AUTH', { user: mockUser, token: mockToken })
-          
-          if (process.client) {
-            localStorage.setItem('auth.token', mockToken)
-            localStorage.setItem('auth.user', JSON.stringify(mockUser))
-            localStorage.setItem('isLoggedIn', 'true')
-          }
-          
-          resolve({ user: mockUser, token: mockToken })
-        } else {
-          reject(new Error('Invalid username or password'))
-        }
-      }, 1000) // จำลอง network delay
-    })
+  // รับข้อมูลจากการ login และเก็บใน store + localStorage
+  async setAuth({ commit }, { user, token }) {
+    try {
+      // บันทึกข้อมูลใน store
+      commit('SET_AUTH', { user, token })
+      
+      // บันทึกใน localStorage
+      if (process.client) {
+        localStorage.setItem('auth.token', token)
+        localStorage.setItem('auth.user', JSON.stringify(user))
+        localStorage.setItem('isLoggedIn', 'true')
+        localStorage.setItem('token', token) // สำหรับ component ที่เรียกตรง ๆ
+      }
+      
+      console.log('Auth data saved successfully')
+      return { success: true }
+    } catch (error) {
+      console.error('Error saving auth data:', error)
+      throw error
+    }
   },
   
   async logout({ commit }) {
-    commit('CLEAR_AUTH')
-    
-    // ลบข้อมูลจาก localStorage
-    if (process.client) {
-      localStorage.removeItem('auth.token')
-      localStorage.removeItem('auth.user')
-      localStorage.removeItem('isLoggedIn')
-      localStorage.removeItem('user') // legacy support
+    try {
+      const apiUrl = process.env.API_BASE_URL || "http://localhost:4000/api";
+      const token = localStorage.getItem('auth.token') || localStorage.getItem('token');
+      
+      // เรียก API logout ถ้ามี token
+      if (token) {
+        await fetch(`${apiUrl}/auth/logout`, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        });
+      }
+    } catch (error) {
+      console.error('Logout API error:', error)
+    } finally {
+      // ลบข้อมูลจาก store และ localStorage ไม่ว่าจะสำเร็จหรือไม่
+      commit('CLEAR_AUTH')
+      
+      if (process.client) {
+        localStorage.removeItem('auth.token')
+        localStorage.removeItem('auth.user')
+        localStorage.removeItem('isLoggedIn')
+        localStorage.removeItem('token')
+      }
+      
+      console.log('Auth data cleared')
     }
   },
   
   // ตรวจสอบ auth state จาก localStorage เมื่อ refresh page
   async initAuth({ commit }) {
     if (process.client) {
-      const token = localStorage.getItem('auth.token')
+      const token = localStorage.getItem('auth.token') || localStorage.getItem('token')
       const userData = localStorage.getItem('auth.user')
       const isLoggedIn = localStorage.getItem('isLoggedIn')
       
@@ -111,34 +89,35 @@ export const actions = {
         try {
           const user = JSON.parse(userData)
           
-          // ตรวจสอบว่า token ยังไม่หมดอายุ (ในกรณีจริงควรเช็คกับ server)
-          // ที่นี่เราจะเช็คแค่ว่า token มีการสร้างไม่เกิน 24 ชั่วโมง
-          const tokenParts = token.split('-')
-          const tokenTime = parseInt(tokenParts[tokenParts.length - 1])
-          const currentTime = Date.now()
-          const tokenAge = currentTime - tokenTime
-          const maxAge = 24 * 60 * 60 * 1000 // 24 hours
-          
-          if (tokenAge < maxAge) {
-            commit('SET_AUTH', { user, token })
-            console.log('Auth restored from localStorage')
+          // ตรวจสอบ token กับ server
+          const apiUrl = process.env.API_BASE_URL || "http://localhost:4000/api";
+          const response = await fetch(`${apiUrl}/auth/profile`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const profileData = await response.json();
+            commit('SET_AUTH', { user: profileData.data, token })
+            console.log('Auth restored and verified with server')
           } else {
-            // Token หมดอายุ
+            // Token ไม่ valid - ลบข้อมูลทั้งหมด
             commit('CLEAR_AUTH')
-            if (process.client) {
-              localStorage.removeItem('auth.token')
-              localStorage.removeItem('auth.user')
-              localStorage.removeItem('isLoggedIn')
-            }
-            console.log('Token expired, cleared auth')
+            localStorage.removeItem('auth.token')
+            localStorage.removeItem('auth.user')
+            localStorage.removeItem('isLoggedIn')
+            localStorage.removeItem('token')
+            console.log('Token invalid, cleared auth')
           }
         } catch (error) {
-          console.error('Error parsing user data:', error)
+          console.error('Error verifying token:', error)
           commit('CLEAR_AUTH')
           if (process.client) {
             localStorage.removeItem('auth.token')
             localStorage.removeItem('auth.user')
             localStorage.removeItem('isLoggedIn')
+            localStorage.removeItem('token')
           }
         }
       } else {
@@ -152,5 +131,7 @@ export const getters = {
   isAuthenticated: (state) => state.auth.loggedIn,
   user: (state) => state.auth.user,
   token: (state) => state.auth.token,
-  userRole: (state) => state.auth.user?.role || null
+  userRole: (state) => state.auth.user?.userLevel || null,
+  customerName: (state) => state.auth.user?.customerName || null,
+  customerId: (state) => state.auth.user?.customerID || null
 }

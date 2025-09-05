@@ -234,14 +234,10 @@ export default {
   data() {
     return {
       mobileMenuOpen: false,
-      openMobileSubMenus: {}, // Track open state of mobile sub menus
-      openDropdowns: {}, // Track open state of desktop dropdowns
-      userDropdownOpen: false, // Track user dropdown state
-      dropdownTimeouts: {}, // Track timeout IDs for delayed hiding
-
-      // Auth
-      username: null,
-      userInfo: null,
+      openMobileSubMenus: {},
+      openDropdowns: {},
+      userDropdownOpen: false,
+      dropdownTimeouts: {},
 
       menuItems: [
         {
@@ -286,28 +282,41 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["isAuthenticated", "username", "userInfo"]),
+    ...mapGetters(["isAuthenticated", "user", "customerName"]),
 
     // Helper computed properties
     displayName() {
-      return this.username || "Username";
+      // แสดงชื่อจากข้อมูลที่ login มา
+      if (this.user) {
+        return this.user.customerName || this.user.UserLogin || "User";
+      }
+      return "Guest";
     },
 
     companyName() {
-      return this.userInfo?.company || "CompanyName";
+      // แสดงชื่อบริษัท/Customer Name
+      if (this.user) {
+        return this.user.customerName || this.user.CustomerName || "Company";
+      }
+      return "Guest Company";
+    },
+
+    userInfo() {
+      // ข้อมูลผู้ใช้ทั้งหมด
+      return this.user || null;
     },
   },
 
   async mounted() {
     // Initialize auth state when component mounts
     if (this.isAuthenticated) {
-      console.log("User is already authenticated");
+      console.log("User is authenticated:", this.user);
+      console.log("Display name:", this.displayName);
     }
   },
 
   methods: {
     isActiveParent(item) {
-      // Check if any sub-item is active
       if (item.items && item.items.length > 0) {
         return item.items.some((subItem) => this.$route.path === subItem.link);
       }
@@ -315,7 +324,6 @@ export default {
     },
 
     showDropdown(index) {
-      // Cancel any pending hide timeout
       if (this.dropdownTimeouts[index]) {
         clearTimeout(this.dropdownTimeouts[index]);
         delete this.dropdownTimeouts[index];
@@ -324,15 +332,13 @@ export default {
     },
 
     scheduleHideDropdown(index) {
-      // Schedule hiding with a delay to allow mouse movement to dropdown
       this.dropdownTimeouts[index] = setTimeout(() => {
         this.$set(this.openDropdowns, index, false);
         delete this.dropdownTimeouts[index];
-      }, 150); // 150ms delay
+      }, 150);
     },
 
     cancelHideDropdown(index) {
-      // Cancel the scheduled hide when mouse enters dropdown
       if (this.dropdownTimeouts[index]) {
         clearTimeout(this.dropdownTimeouts[index]);
         delete this.dropdownTimeouts[index];
@@ -359,7 +365,6 @@ export default {
     },
 
     logout() {
-      // Handle logout using store action
       this.$store
         .dispatch("logout")
         .then(() => {
@@ -367,13 +372,11 @@ export default {
         })
         .catch((error) => {
           console.error("Logout error:", error);
-          // Fallback logout
           this.$router.push("/login");
         });
     },
   },
 
-  // Clean up timeouts when component is destroyed
   beforeDestroy() {
     Object.values(this.dropdownTimeouts).forEach((timeout) => {
       clearTimeout(timeout);
