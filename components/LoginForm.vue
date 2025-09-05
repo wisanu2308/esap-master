@@ -126,14 +126,66 @@ export default {
         showCancelButton: true,
         confirmButtonText: "Send Reset Link",
         cancelButtonText: "Cancel",
+        inputValidator: (value) => {
+          if (!value) {
+            return "กรุณากรอกอีเมล";
+          }
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            return "รูปแบบอีเมลไม่ถูกต้อง";
+          }
+        }
       });
 
       if (email) {
-        this.$swal.fire({
-          title: "Reset Link Sent!",
-          text: `Password reset link has been sent to ${email}`,
-          icon: "success",
-        });
+        try {
+          // แสดง loading
+          this.$swal.fire({
+            title: "กำลังส่งอีเมล...",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false,
+            didOpen: () => {
+              this.$swal.showLoading();
+            }
+          });
+
+          const apiUrl = process.env.API_BASE_URL || "http://localhost:4000/api";
+          
+          const response = await fetch(`${apiUrl}/auth/forgot-password`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            this.$swal.fire({
+              title: "Reset Link Sent!",
+              html: `
+                <p>ลิงก์รีเซ็ตรหัสผ่านได้ถูกส่งไปยัง</p>
+                <strong>${email}</strong>
+                <p>โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์เพื่อรีเซ็ตรหัสผ่าน</p>
+                <small>หากไม่พบอีเมล โปรดตรวจสอบโฟลเดอร์ Spam</small>
+              `,
+              icon: "success",
+              confirmButtonText: "ตกลง"
+            });
+          } else {
+            throw new Error(data.message || "Failed to send reset email");
+          }
+        } catch (error) {
+          console.error("Forgot password error:", error);
+          this.$swal.fire({
+            title: "Error!",
+            text: error.message || "ไม่สามารถส่งอีเมลรีเซ็ตรหัสผ่านได้",
+            icon: "error",
+            confirmButtonText: "ตกลง"
+          });
+        }
       }
     },
 

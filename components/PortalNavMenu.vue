@@ -142,6 +142,14 @@
                 >
                   <i class="bi bi-person mr-2"></i>Profile
                 </a>
+                <!-- Change Password Link -->
+                <NuxtLink
+                  to="/change-password"
+                  @click="userDropdownOpen = false"
+                  class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-300 transition-colors"
+                >
+                  <i class="bi bi-lock mr-2"></i>Change Password
+                </NuxtLink>
                 <a
                   href="#"
                   class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-300 transition-colors"
@@ -218,6 +226,43 @@
             >
               {{ item.title }}
             </NuxtLink>
+          </div>
+
+          <!-- Mobile User Menu -->
+          <div class="border-t border-gray-200 pt-4 pb-3">
+            <div class="px-3 mb-3">
+              <div class="text-base font-medium text-gray-800">{{ displayName }}</div>
+              <div class="text-sm text-gray-500">{{ companyName }}</div>
+            </div>
+            <div class="space-y-1">
+              <a
+                href="#"
+                class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-cyan-300 hover:bg-cyan-50 transition-colors"
+              >
+                Profile
+              </a>
+              <!-- Mobile Change Password -->
+              <NuxtLink
+                to="/change-password"
+                @click="mobileMenuOpen = false"
+                class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-cyan-300 hover:bg-cyan-50 transition-colors"
+              >
+                <i class="bi bi-lock mr-2"></i>Change Password
+              </NuxtLink>
+              <a
+                href="#"
+                class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-cyan-300 hover:bg-cyan-50 transition-colors"
+              >
+                Settings
+              </a>
+              <a
+                href="#"
+                @click="logout"
+                class="block px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50 transition-colors"
+              >
+                Logout
+              </a>
+            </div>
           </div>
         </div>
       </div>
